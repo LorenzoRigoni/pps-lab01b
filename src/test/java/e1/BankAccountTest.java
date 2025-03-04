@@ -9,16 +9,18 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class BankAccountTest {
 
     protected BankAccount account;
+    private static final int INITIAL_DEPOSIT = 0;
+    private static final int DEPOSIT_AMOUNT = 1000;
 
     @Test
     public void testInitiallyEmpty() {
-        assertEquals(0, this.account.getBalance());
+        assertEquals(INITIAL_DEPOSIT, this.account.getBalance());
     }
 
     @Test
     public void testCanDeposit() {
-        this.account.deposit(1000);
-        assertEquals(1000, this.account.getBalance());
+        this.account.deposit(DEPOSIT_AMOUNT);
+        assertEquals(DEPOSIT_AMOUNT, this.account.getBalance());
     }
 
 }
