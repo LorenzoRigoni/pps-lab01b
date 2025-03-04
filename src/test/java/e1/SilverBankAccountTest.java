@@ -1,5 +1,6 @@
 package e1;
 
+import e1.checkersCanWithdraw.NoOverdraftCheckerCanWithdraw;
 import e1.feeCalculators.UnitFeeCalculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,7 +11,7 @@ public class SilverBankAccountTest extends BankAccountTest {
 
     @BeforeEach
     void beforeEach() {
-        this.account = new BankAccountImpl(new CoreBankAccount(), new UnitFeeCalculator());
+        this.account = new BankAccountImpl(new CoreBankAccount(), new UnitFeeCalculator(), new NoOverdraftCheckerCanWithdraw());
     }
 
     @Test

@@ -1,5 +1,6 @@
 package e1;
 
+import e1.checkersCanWithdraw.NoOverdraftCheckerCanWithdraw;
 import e1.feeCalculators.BronzeConditionalFeeCalculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class BronzeBankAccountTest extends BankAccountTest {
     @BeforeEach
     void beforeEach() {
-        this.account = new BankAccountImpl(new CoreBankAccount(), new BronzeConditionalFeeCalculator());
+        this.account = new BankAccountImpl(new CoreBankAccount(), new BronzeConditionalFeeCalculator(), new NoOverdraftCheckerCanWithdraw());
     }
 
     @Test
