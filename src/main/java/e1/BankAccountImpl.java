@@ -1,11 +1,15 @@
 package e1;
 
+import e1.feeCalculators.AbstractFeeCalculator;
+
 public class BankAccountImpl implements BankAccount {
 
     private CoreBankAccount base;
+    private AbstractFeeCalculator feeCalculator;
 
-    public BankAccountImpl(CoreBankAccount base) {
+    public BankAccountImpl(CoreBankAccount base, AbstractFeeCalculator feeCalculator) {
         this.base = base;
+        this.feeCalculator = feeCalculator;
     }
 
     public int getBalance() {
@@ -20,6 +24,6 @@ public class BankAccountImpl implements BankAccount {
         if (this.getBalance() < amount){
             throw new IllegalStateException();
         }
-        base.withdraw(amount + 1);
+        this.base.withdraw(amount + this.feeCalculator.getFee(amount));
     }
 }

@@ -1,5 +1,6 @@
 package e1;
 
+import e1.feeCalculators.NoFeeCalculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class GoldBankAccountTest extends BankAccountTest {
     @BeforeEach
     void beforeEach() {
-        this.account = new BankAccountImpl(new CoreBankAccount());
+        this.account = new BankAccountImpl(new CoreBankAccount(), new NoFeeCalculator());
     }
 
     @Test
