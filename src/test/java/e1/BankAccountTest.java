@@ -8,12 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class BankAccountTest {
 
-    private BankAccount account;
-
-    @BeforeEach
-    void init(){
-        this.account = new BankAccountImpl(new CoreBankAccount());
-    }
+    protected BankAccount account;
 
     @Test
     public void testInitiallyEmpty() {
@@ -24,19 +19,6 @@ public class BankAccountTest {
     public void testCanDeposit() {
         this.account.deposit(1000);
         assertEquals(1000, this.account.getBalance());
-    }
-
-    @Test
-    public void testCanWithdraw() {
-        this.account.deposit(1000);
-        this.account.withdraw(200);
-        assertEquals(799, this.account.getBalance());
-    }
-
-    @Test
-    public void testCannotWithdrawMoreThanAvailable(){
-        this.account.deposit(1000);
-        assertThrows(IllegalStateException.class, () -> this.account.withdraw(1200));
     }
 
 }
