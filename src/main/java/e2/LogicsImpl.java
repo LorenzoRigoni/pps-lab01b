@@ -5,7 +5,7 @@ import java.util.*;
 public class LogicsImpl implements Logics {
 	
 	private final ChessCharacter pawn;
-	private KnightCharacter knight;
+	private final KnightCharacter knight;
 	private final Random random = new Random();
 	private final int size;
 	 
