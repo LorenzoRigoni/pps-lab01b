@@ -28,4 +28,24 @@ public interface Cell {
      * @param flag The flag to assign
      */
     void setCellFlag(final boolean flag);
+
+    /**
+     * Set the number of adjacent mines of the cell.
+     *
+     * @param numOfMines The number of adjacent mines of the cell.
+     */
+    void setNumOfAdjacentMines(final int numOfMines);
+
+    /**
+     * Get the number of adjacent mines of the cell.
+     * @return The number of adjacent mines of the cell.
+     */
+    int getNumOfAdjacentMine();
+
+    /**
+     * Set the cell visibility.
+     *
+     * @param visibility The cell visibility to set
+     */
+    void setCellIsShown(final boolean visibility);
 }

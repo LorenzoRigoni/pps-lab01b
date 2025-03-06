@@ -1,4 +1,5 @@
 package e3;
+import e3.gameObjects.AdjacentCellsStrategy;
 import org.junit.jupiter.api.*;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class LogicTest {
 
     @BeforeEach
     public void beforeEach() {
-        this.logic = new LogicsImpl(SIZE, MINES_POSITIONS);
+        this.logic = new LogicsImpl(SIZE, MINES_POSITIONS, new AdjacentCellsStrategy());
     }
 
     @Test
@@ -52,7 +53,7 @@ public class LogicTest {
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
                 final Pair<Integer, Integer> positionToClick = new Pair<>(i, j);
-                if (!MINES_POSITIONS.contains(positionToClick))
+                if (!MINES_POSITIONS.contains(positionToClick) && !this.logic.getGrid().getGrid().get(positionToClick).isCellShown())
                     this.logic.isMineFound(positionToClick);
             }
         }

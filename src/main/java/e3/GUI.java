@@ -1,5 +1,7 @@
 package e3;
 
+import e3.gameObjects.AdjacentCellsStrategy;
+
 import javax.swing.*;
 import javax.swing.event.MouseInputAdapter;
 import javax.swing.event.MouseInputListener;
@@ -16,7 +18,7 @@ public class GUI extends JFrame {
     private final Logics logics;
     
     public GUI(int size, int numOfMines) {
-        this.logics = new LogicsImpl(size, numOfMines);
+        this.logics = new LogicsImpl(size, numOfMines, new AdjacentCellsStrategy());
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(100*size, 100*size);
         

@@ -18,7 +18,7 @@ public interface Grid {
      *
      * @return true if all the no-mines cells are shown, false otherwise
      */
-    boolean areAllTheNoMinesCellsShowed();
+    boolean areAllTheNoMinesCellsVisible();
 
     /**
      * Get the grid of the game.
