@@ -1,7 +1,5 @@
 package e3;
 
-import e3.gameObjects.Grid;
-
 public interface Logics {
     /**
      * Checks if, in a given position, there is a mine.
@@ -9,7 +7,7 @@ public interface Logics {
      * @param position The position to check
      * @return true if there is a mine (game lost), false otherwise
      */
-    boolean isMineFound(final Pair<Integer, Integer> position);
+    boolean doesCellContainsAMine(final Pair<Integer, Integer> position);
 
     /**
      * Checks if the player has won the game by selecting all the no-mine positions.
@@ -17,13 +15,6 @@ public interface Logics {
      * @return true if the game is over, false otherwise
      */
     boolean isGameOver();
-
-    /**
-     * Get the grid of the game.
-     *
-     * @return The grid as a map with positions as keys and cells as values
-     */
-    Grid getGrid();
 
     /**
      * Set the flag of a cell.
@@ -39,7 +30,7 @@ public interface Logics {
      * @param position The position of the cell
      * @return true if the cell has a flag, false otherwise
      */
-    boolean getCellFlag(final Pair<Integer, Integer> position);
+    boolean isCellFlagged(final Pair<Integer, Integer> position);
 
     /**
      * Get the number of mines of a cell.

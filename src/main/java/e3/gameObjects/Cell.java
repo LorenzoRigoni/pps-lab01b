@@ -34,18 +34,18 @@ public interface Cell {
      *
      * @param numOfMines The number of adjacent mines of the cell.
      */
-    void setNumOfAdjacentMines(final int numOfMines);
+    void setNumOfMines(final int numOfMines);
 
     /**
      * Get the number of adjacent mines of the cell.
      * @return The number of adjacent mines of the cell.
      */
-    int getNumOfAdjacentMine();
+    int getNumOfMines();
 
     /**
      * Set the cell visibility.
      *
      * @param visibility The cell visibility to set
      */
-    void setCellIsShown(final boolean visibility);
+    void setCellVisibility(final boolean visibility);
 }

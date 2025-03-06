@@ -4,7 +4,7 @@ public class CellImpl implements Cell {
     private final boolean hasMine;
     private boolean isShown;
     private boolean isFlagged;
-    private int numOfAdjacentMines;
+    private int numOfMines;
 
     public CellImpl(final boolean hasMine) {
         this.hasMine = hasMine;
@@ -33,17 +33,17 @@ public class CellImpl implements Cell {
     }
 
     @Override
-    public void setNumOfAdjacentMines(final int numOfMines) {
-        this.numOfAdjacentMines = numOfMines;
+    public void setNumOfMines(final int numOfMines) {
+        this.numOfMines = numOfMines;
     }
 
     @Override
-    public int getNumOfAdjacentMine() {
-        return this.numOfAdjacentMines;
+    public int getNumOfMines() {
+        return this.numOfMines;
     }
 
     @Override
-    public void setCellIsShown(boolean visibility) {
+    public void setCellVisibility(boolean visibility) {
         this.isShown = visibility;
     }
 }

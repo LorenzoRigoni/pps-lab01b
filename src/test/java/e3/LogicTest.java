@@ -35,17 +35,17 @@ public class LogicTest {
 
     @Test
     public void testCellDoesntContainsAMine() {
-        assertFalse(this.logic.isMineFound(NO_MINE_POSITION));
+        assertFalse(this.logic.doesCellContainsAMine(NO_MINE_POSITION));
     }
 
     @Test
     public void testGameIsLost() {
-        assertTrue(this.logic.isMineFound(MINES_POSITIONS.get(0)));
+        assertTrue(this.logic.doesCellContainsAMine(MINES_POSITIONS.get(0)));
     }
 
     @Test
     public void testCorrectNumberOfAdjacentMines() {
-        assertEquals(NUM_OF_ADJACENT_MINES, this.logic.getGrid().getNumOfMines(NO_MINE_POSITION));
+        assertEquals(NUM_OF_ADJACENT_MINES, this.logic.getNumOfMinesOfACell(NO_MINE_POSITION));
     }
 
     @Test
@@ -53,8 +53,8 @@ public class LogicTest {
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
                 final Pair<Integer, Integer> positionToClick = new Pair<>(i, j);
-                if (!MINES_POSITIONS.contains(positionToClick) && !this.logic.getGrid().getGrid().get(positionToClick).isCellShown())
-                    this.logic.isMineFound(positionToClick);
+                if (!MINES_POSITIONS.contains(positionToClick) && !this.logic.isCellAlreadyShown(positionToClick))
+                    this.logic.doesCellContainsAMine(positionToClick);
             }
         }
 

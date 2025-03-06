@@ -2,8 +2,6 @@ package e3.gameObjects;
 
 import e3.Pair;
 
-import java.util.Map;
-
 public interface Grid {
     /**
      * Checks if a cell contains a mine.
@@ -21,19 +19,12 @@ public interface Grid {
     boolean areAllTheNoMinesCellsVisible();
 
     /**
-     * Get the grid of the game.
-     *
-     * @return The grid as a map with positions as keys and cells as values
-     */
-    Map<Pair<Integer, Integer>, Cell> getGrid();
-
-    /**
      * Set the flag on a cell.
      *
      * @param position The position of the cell
      * @param flag The flag to set
      */
-    void setFlagOnACell(final Pair<Integer, Integer> position, final boolean flag);
+    void setCellFlag(final Pair<Integer, Integer> position, final boolean flag);
 
     /**
      * Checks if a cell is flagged.
@@ -49,7 +40,7 @@ public interface Grid {
      * @param position The position of the cell
      * @return The number of adjacent mines
      */
-    int getNumOfMines(final Pair<Integer, Integer> position);
+    int getNumOfMinesOfACell(final Pair<Integer, Integer> position);
 
     /**
      * Check if a cell is already been clicked.

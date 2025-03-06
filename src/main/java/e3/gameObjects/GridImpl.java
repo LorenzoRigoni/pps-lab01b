@@ -50,12 +50,7 @@ public class GridImpl implements Grid {
     }
 
     @Override
-    public Map<Pair<Integer, Integer>, Cell> getGrid() {
-        return new HashMap<>(this.grid);
-    }
-
-    @Override
-    public void setFlagOnACell(Pair<Integer, Integer> position, boolean flag) {
+    public void setCellFlag(Pair<Integer, Integer> position, boolean flag) {
         this.grid.get(position).setCellFlag(flag);
     }
 
@@ -65,8 +60,8 @@ public class GridImpl implements Grid {
     }
 
     @Override
-    public int getNumOfMines(Pair<Integer, Integer> position) {
-        return this.grid.get(position).getNumOfAdjacentMine();
+    public int getNumOfMinesOfACell(Pair<Integer, Integer> position) {
+        return this.grid.get(position).getNumOfMines();
     }
 
     @Override

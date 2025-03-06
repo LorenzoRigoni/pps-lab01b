@@ -23,7 +23,7 @@ public class AdjacentCellsStrategy implements NumOfMinesStrategy {
                 numOfAdjecentMines++;
             }
         }
-        grid.get(position).setNumOfAdjacentMines(numOfAdjecentMines);
+        grid.get(position).setNumOfMines(numOfAdjecentMines);
     }
 
     @Override
@@ -32,9 +32,9 @@ public class AdjacentCellsStrategy implements NumOfMinesStrategy {
             return;
 
         this.revealedPositions.add(position);
-        grid.get(position).setCellIsShown(true);
+        grid.get(position).setCellVisibility(true);
 
-        if (grid.get(position).getNumOfAdjacentMine() == 0) {
+        if (grid.get(position).getNumOfMines() == 0) {
             for (AdjacentPositions dir : AdjacentPositions.values()) {
                 final int adjX = position.getX() + dir.getX();
                 final int adjY = position.getY() + dir.getY();

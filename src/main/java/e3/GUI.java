@@ -10,7 +10,6 @@ import java.util.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-import java.util.List;
 
 public class GUI extends JFrame {
     
@@ -29,7 +28,7 @@ public class GUI extends JFrame {
         ActionListener onClick = (e)->{
             final JButton bt = (JButton)e.getSource();
             final Pair<Integer,Integer> pos = buttons.get(bt);
-            boolean aMineWasFound = this.logics.isMineFound(pos);
+            boolean aMineWasFound = this.logics.doesCellContainsAMine(pos);
             if (aMineWasFound) {
                 quitGame();
                 JOptionPane.showMessageDialog(this, "You lost!!");
@@ -51,7 +50,7 @@ public class GUI extends JFrame {
                 final JButton bt = (JButton)e.getSource();
                 if (bt.isEnabled()){
                     final Pair<Integer,Integer> pos = buttons.get(bt);
-                    logics.setCellFlag(pos, !logics.getCellFlag(pos));
+                    logics.setCellFlag(pos, !logics.isCellFlagged(pos));
                 }
                 drawBoard(); 
             }
@@ -76,7 +75,7 @@ public class GUI extends JFrame {
             // call the logic here
             // if this button is a mine, draw it "*"
             // disable the button
-            if (this.logics.isMineFound(entry.getValue())) {
+            if (this.logics.doesCellContainsAMine(entry.getValue())) {
                 entry.getKey().setText("*");
                 entry.getKey().setEnabled(false);
             }
@@ -88,7 +87,7 @@ public class GUI extends JFrame {
             // call the logic here
             // if this button is a cell with counter, put the number
             // if this button has a flag, put the flag
-            if (this.logics.getCellFlag(entry.getValue()))
+            if (this.logics.isCellFlagged(entry.getValue()))
                 entry.getKey().setText("F");
             else if (this.logics.isCellAlreadyShown(entry.getValue())) {
                 entry.getKey().setText("" + this.logics.getNumOfMinesOfACell(entry.getValue()));

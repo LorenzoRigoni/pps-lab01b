@@ -18,7 +18,7 @@ public class LogicsImpl implements Logics {
     }
 
     @Override
-    public boolean isMineFound(final Pair<Integer, Integer> position) {
+    public boolean doesCellContainsAMine(final Pair<Integer, Integer> position) {
         return this.grid.doesCellContainsAMine(position);
     }
 
@@ -28,23 +28,18 @@ public class LogicsImpl implements Logics {
     }
 
     @Override
-    public Grid getGrid() {
-        return this.grid;
-    }
-
-    @Override
     public void setCellFlag(Pair<Integer, Integer> position, boolean flag) {
-        this.grid.setFlagOnACell(position, flag);
+        this.grid.setCellFlag(position, flag);
     }
 
     @Override
-    public boolean getCellFlag(Pair<Integer, Integer> position) {
+    public boolean isCellFlagged(Pair<Integer, Integer> position) {
         return this.grid.isCellFlagged(position);
     }
 
     @Override
     public int getNumOfMinesOfACell(Pair<Integer, Integer> position) {
-        return this.grid.getNumOfMines(position);
+        return this.grid.getNumOfMinesOfACell(position);
     }
 
     @Override
