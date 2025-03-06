@@ -13,19 +13,19 @@ public enum AdjacentPositions {
     DOWN(1, 0),
     DOWN_RIGHT(1, 1);
 
-    private final int dx;
-    private final int dy;
+    private final int x;
+    private final int y;
 
-    AdjacentPositions(int dx, int dy) {
-        this.dx = dx;
-        this.dy = dy;
+    AdjacentPositions(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
-    public int getDx() {
-        return dx;
+    public int getX() {
+        return x;
     }
 
-    public int getDy() {
-        return dy;
+    public int getY() {
+        return y;
     }
 }

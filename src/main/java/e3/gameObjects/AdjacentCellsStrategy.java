@@ -7,29 +7,40 @@ import java.util.List;
 import java.util.Map;
 
 public class AdjacentCellsStrategy implements NumOfMinesStrategy {
+    private final List<Pair<Integer, Integer>> revealedPositions;
+
+    public AdjacentCellsStrategy() {
+        this.revealedPositions = new ArrayList<>();
+    }
 
     @Override
-    public int calcNumOfMines(Pair<Integer, Integer> position, Map<Pair<Integer, Integer>, Cell> grid, int size) {
-        final List<Pair<Integer, Integer>> visitedPositions = new ArrayList<>();
+    public void calcNumOfMines(Pair<Integer, Integer> position, Map<Pair<Integer, Integer>, Cell> grid, int size) {
         int numOfAdjecentMines = 0;
         for (AdjacentPositions dir : AdjacentPositions.values()) {
-            final int adjX = position.getX() + dir.getDx();
-            final int adjY = position.getY() + dir.getDy();
-            if (this.isOnTheGrid(adjX, adjY, size)) {
-                final Pair<Integer, Integer> positionToCheck = new Pair<>(adjX, adjY);
-                visitedPositions.add(positionToCheck);
-                if (grid.get(positionToCheck).doesCellContainsAMine())
-                    numOfAdjecentMines++;
+            final int adjX = position.getX() + dir.getX();
+            final int adjY = position.getY() + dir.getY();
+            if (this.isOnTheGrid(adjX, adjY, size) && grid.get(new Pair<>(adjX, adjY)).doesCellContainsAMine()) {
+                numOfAdjecentMines++;
             }
         }
         grid.get(position).setNumOfAdjacentMines(numOfAdjecentMines);
+    }
+
+    @Override
+    public void revealNumOfMines(Pair<Integer, Integer> position, Map<Pair<Integer, Integer>, Cell> grid, int size) {
+        if (!isOnTheGrid(position.getX(), position.getY(), size) || this.revealedPositions.contains(position))
+            return;
+
+        this.revealedPositions.add(position);
         grid.get(position).setCellIsShown(true);
-        if (numOfAdjecentMines == 0) {
-            for (final Pair<Integer, Integer> pos : visitedPositions) {
-                return this.calcNumOfMines(pos, grid, size);
+
+        if (grid.get(position).getNumOfAdjacentMine() == 0) {
+            for (AdjacentPositions dir : AdjacentPositions.values()) {
+                final int adjX = position.getX() + dir.getX();
+                final int adjY = position.getY() + dir.getY();
+                revealNumOfMines(new Pair<>(adjX, adjY), grid, size);
             }
         }
-        return numOfAdjecentMines;
     }
 
     private boolean isOnTheGrid(final int x, final int y, final int size) {

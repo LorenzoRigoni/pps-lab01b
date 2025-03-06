@@ -50,4 +50,12 @@ public interface Grid {
      * @return The number of adjacent mines
      */
     int getNumOfMines(final Pair<Integer, Integer> position);
+
+    /**
+     * Check if a cell is already been clicked.
+     *
+     * @param position The position of the cell
+     * @return true if it is already been clicked, false otherwise
+     */
+    boolean isCellAlreadyShown(final Pair<Integer, Integer> position);
 }

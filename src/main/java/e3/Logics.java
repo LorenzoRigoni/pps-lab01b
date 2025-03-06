@@ -24,4 +24,36 @@ public interface Logics {
      * @return The grid as a map with positions as keys and cells as values
      */
     Grid getGrid();
+
+    /**
+     * Set the flag of a cell.
+     *
+     * @param position The position of the cell
+     * @param flag The flag to assign to the cell
+     */
+    void setCellFlag(final Pair<Integer, Integer> position, final boolean flag);
+
+    /**
+     * Get the flag of the cell in the given position.
+     *
+     * @param position The position of the cell
+     * @return true if the cell has a flag, false otherwise
+     */
+    boolean getCellFlag(final Pair<Integer, Integer> position);
+
+    /**
+     * Get the number of mines of a cell.
+     *
+     * @param position The position of the cell
+     * @return The number of the mines
+     */
+    int getNumOfMinesOfACell(final Pair<Integer, Integer> position);
+
+    /**
+     * Check if a cell is already been clicked.
+     *
+     * @param position The position of the cell
+     * @return true if it is already been clicked, false otherwise
+     */
+    boolean isCellAlreadyShown(final Pair<Integer, Integer> position);
 }

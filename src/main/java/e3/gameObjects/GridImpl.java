@@ -18,7 +18,8 @@ public class GridImpl implements Grid {
         this.numOfMines = numOfMines;
         this.grid = new HashMap<>();
         this.numOfMinesStrategy = numOfMinesStrategy;
-        this.putMinesOnRandomPositions();
+        this.putMines();
+        this.calcNumOfMines();
     }
 
     public GridImpl(final int size, final List<Pair<Integer, Integer>> minesPositions, final NumOfMinesStrategy numOfMinesStrategy) {
@@ -26,14 +27,15 @@ public class GridImpl implements Grid {
         this.numOfMines = minesPositions.size();
         this.grid = new HashMap<>();
         this.numOfMinesStrategy = numOfMinesStrategy;
-        this.putMinesOnSpecifiedPositions(minesPositions);
+        this.putMines(minesPositions);
+        this.calcNumOfMines();
     }
 
     @Override
     public boolean doesCellContainsAMine(Pair<Integer, Integer> position) {
         final boolean cellHasMine = this.grid.get(position).doesCellContainsAMine();
         if (!cellHasMine) {
-            this.numOfMinesStrategy.calcNumOfMines(position, this.grid, this.size);
+            this.numOfMinesStrategy.revealNumOfMines(position, this.grid, this.size);
         }
         return cellHasMine;
     }
@@ -41,7 +43,7 @@ public class GridImpl implements Grid {
     @Override
     public boolean areAllTheNoMinesCellsVisible() {
         for (final Cell cell: this.grid.values()) {
-            if (!cell.isCellShown())
+            if (!cell.isCellShown() && !cell.doesCellContainsAMine())
                 return false;
         }
         return true;
@@ -64,24 +66,32 @@ public class GridImpl implements Grid {
 
     @Override
     public int getNumOfMines(Pair<Integer, Integer> position) {
-        this.numOfMinesStrategy.calcNumOfMines(position, new HashMap<>(this.grid), this.size);
         return this.grid.get(position).getNumOfAdjacentMine();
     }
 
-    private void putMinesOnRandomPositions() {
+    @Override
+    public boolean isCellAlreadyShown(Pair<Integer, Integer> position) {
+        return this.grid.get(position).isCellShown();
+    }
+
+    private void putMines() {
         int numMinesPositionated = 0;
+        while (numMinesPositionated < this.numOfMines) {
+            final Pair<Integer, Integer> randomPosition = new Pair<>(new Random().nextInt(this.size), new Random().nextInt(this.size));
+            if(!this.grid.containsKey(randomPosition)) {
+                this.grid.put(randomPosition, new CellImpl(true));
+                numMinesPositionated++;
+            }
+        }
         for (int i = 0; i < this.size; i++) {
             for (int j = 0; j < this.size; j++) {
-                if (new Random().nextInt() % 2 == 0 && numMinesPositionated < this.numOfMines) {
-                    this.grid.put(new Pair<>(i, j), new CellImpl(true));
-                    numMinesPositionated++;
-                } else
+                if (!this.grid.containsKey(new Pair<>(i, j)))
                     this.grid.put(new Pair<>(i, j), new CellImpl(false));
             }
         }
     }
 
-    private void putMinesOnSpecifiedPositions(List<Pair<Integer, Integer>> minesPositions) {
+    private void putMines(List<Pair<Integer, Integer>> minesPositions) {
         for (int i = 0; i < this.size; i++) {
             for (int j = 0; j < this.size; j++) {
                 if (minesPositions.contains(new Pair<>(i, j)))
@@ -89,6 +99,12 @@ public class GridImpl implements Grid {
                 else
                     this.grid.put(new Pair<>(i, j), new CellImpl(false));
             }
+        }
+    }
+
+    private void calcNumOfMines() {
+        for (final Pair<Integer, Integer> pos: this.grid.keySet()) {
+            this.numOfMinesStrategy.calcNumOfMines(pos, grid, this.size);
         }
     }
 }

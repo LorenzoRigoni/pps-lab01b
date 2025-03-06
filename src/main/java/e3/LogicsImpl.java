@@ -31,4 +31,24 @@ public class LogicsImpl implements Logics {
     public Grid getGrid() {
         return this.grid;
     }
+
+    @Override
+    public void setCellFlag(Pair<Integer, Integer> position, boolean flag) {
+        this.grid.setFlagOnACell(position, flag);
+    }
+
+    @Override
+    public boolean getCellFlag(Pair<Integer, Integer> position) {
+        return this.grid.isCellFlagged(position);
+    }
+
+    @Override
+    public int getNumOfMinesOfACell(Pair<Integer, Integer> position) {
+        return this.grid.getNumOfMines(position);
+    }
+
+    @Override
+    public boolean isCellAlreadyShown(Pair<Integer, Integer> position) {
+        return this.grid.isCellAlreadyShown(position);
+    }
 }

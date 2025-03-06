@@ -10,6 +10,7 @@ import java.util.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 public class GUI extends JFrame {
     
@@ -28,14 +29,15 @@ public class GUI extends JFrame {
         ActionListener onClick = (e)->{
             final JButton bt = (JButton)e.getSource();
             final Pair<Integer,Integer> pos = buttons.get(bt);
-            boolean aMineWasFound = false; // call the logic here to tell it that cell at 'pos' has been seleced
+            boolean aMineWasFound = this.logics.isMineFound(pos);
             if (aMineWasFound) {
                 quitGame();
                 JOptionPane.showMessageDialog(this, "You lost!!");
+                System.exit(0);
             } else {
                 drawBoard();            	
             }
-            boolean isThereVictory = false; // call the logic here to ask if there is victory
+            boolean isThereVictory = this.logics.isGameOver();
             if (isThereVictory){
                 quitGame();
                 JOptionPane.showMessageDialog(this, "You won!!");
@@ -49,7 +51,7 @@ public class GUI extends JFrame {
                 final JButton bt = (JButton)e.getSource();
                 if (bt.isEnabled()){
                     final Pair<Integer,Integer> pos = buttons.get(bt);
-                    // call the logic here to put/remove a flag
+                    logics.setCellFlag(pos, !logics.getCellFlag(pos));
                 }
                 drawBoard(); 
             }
@@ -74,6 +76,10 @@ public class GUI extends JFrame {
             // call the logic here
             // if this button is a mine, draw it "*"
             // disable the button
+            if (this.logics.isMineFound(entry.getValue())) {
+                entry.getKey().setText("*");
+                entry.getKey().setEnabled(false);
+            }
     	}
     }
 
@@ -82,6 +88,12 @@ public class GUI extends JFrame {
             // call the logic here
             // if this button is a cell with counter, put the number
             // if this button has a flag, put the flag
+            if (this.logics.getCellFlag(entry.getValue()))
+                entry.getKey().setText("F");
+            else if (this.logics.isCellAlreadyShown(entry.getValue())) {
+                entry.getKey().setText("" + this.logics.getNumOfMinesOfACell(entry.getValue()));
+                entry.getKey().setEnabled(false);
+            }
     	}
     }
     

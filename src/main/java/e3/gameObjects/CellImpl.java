@@ -14,7 +14,6 @@ public class CellImpl implements Cell {
 
     @Override
     public boolean doesCellContainsAMine() {
-        this.isShown = true;
         return this.hasMine;
     }
 
