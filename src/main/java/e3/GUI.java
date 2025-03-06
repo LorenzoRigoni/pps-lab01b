@@ -72,9 +72,6 @@ public class GUI extends JFrame {
     private void quitGame() {
         this.drawBoard();
     	for (var entry: this.buttons.entrySet()) {
-            // call the logic here
-            // if this button is a mine, draw it "*"
-            // disable the button
             if (this.logics.doesCellContainsAMine(entry.getValue())) {
                 entry.getKey().setText("*");
                 entry.getKey().setEnabled(false);
@@ -84,15 +81,14 @@ public class GUI extends JFrame {
 
     private void drawBoard() {
         for (var entry: this.buttons.entrySet()) {
-            // call the logic here
-            // if this button is a cell with counter, put the number
-            // if this button has a flag, put the flag
             if (this.logics.isCellFlagged(entry.getValue()))
                 entry.getKey().setText("F");
             else if (this.logics.isCellAlreadyShown(entry.getValue())) {
                 entry.getKey().setText("" + this.logics.getNumOfMinesOfACell(entry.getValue()));
                 entry.getKey().setEnabled(false);
             }
+            else
+                entry.getKey().setText("");
     	}
     }
     
